@@ -15,9 +15,9 @@ let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_service_1.PrismaService],
+        imports: [],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService]
+        providers: [users_service_1.UsersService, prisma_service_1.PrismaService],
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;

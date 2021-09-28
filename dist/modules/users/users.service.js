@@ -22,7 +22,8 @@ let UsersService = class UsersService {
                 id: String(new Date().getTime()),
                 name: createUserDto.name,
                 email: createUserDto.email,
-            }
+                password: createUserDto.password,
+            },
         });
     }
     findAll() {
@@ -30,7 +31,7 @@ let UsersService = class UsersService {
     }
     findOne(id) {
         return this.prisma.user.findMany({
-            where: { id }
+            where: { id },
         });
     }
     update(id, updateUserDto) {
@@ -39,8 +40,9 @@ let UsersService = class UsersService {
                 id: String(new Date().getTime()),
                 name: updateUserDto.name,
                 email: updateUserDto.email,
+                password: updateUserDto.password,
             },
-            where: { id }
+            where: { id },
         });
     }
     remove(id) {

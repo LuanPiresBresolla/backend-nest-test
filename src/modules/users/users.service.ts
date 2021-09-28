@@ -13,7 +13,8 @@ export class UsersService {
         id: String(new Date().getTime()),
         name: createUserDto.name,
         email: createUserDto.email,
-      }
+        password: createUserDto.password,
+      },
     });
   }
 
@@ -23,7 +24,7 @@ export class UsersService {
 
   findOne(id: string) {
     return this.prisma.user.findMany({
-      where: { id }
+      where: { id },
     });
   }
 
@@ -33,8 +34,9 @@ export class UsersService {
         id: String(new Date().getTime()),
         name: updateUserDto.name,
         email: updateUserDto.email,
+        password: updateUserDto.password,
       },
-      where: { id }
+      where: { id },
     });
   }
 
