@@ -32,8 +32,13 @@ let UsersService = class UsersService {
         return this.prisma.user.findMany();
     }
     findOne(id) {
-        return this.prisma.user.findMany({
+        return this.prisma.user.findUnique({
             where: { id },
+        });
+    }
+    findByLogin(login) {
+        return this.prisma.user.findUnique({
+            where: { login },
         });
     }
     async update(id, updateUserDto) {

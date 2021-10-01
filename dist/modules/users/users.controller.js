@@ -17,15 +17,9 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
-const local_auth_guard_1 = require("./authenticate/local-auth.guard");
-const authenticate_service_1 = require("./authenticate/authenticate.service");
 let UsersController = class UsersController {
-    constructor(usersService, authenticateService) {
+    constructor(usersService) {
         this.usersService = usersService;
-        this.authenticateService = authenticateService;
-    }
-    login(createUserDto) {
-        return this.authenticateService.login(createUserDto);
     }
     create(createUserDto) {
         return this.usersService.create(createUserDto);
@@ -43,14 +37,6 @@ let UsersController = class UsersController {
         return this.usersService.remove(id);
     }
 };
-__decorate([
-    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
-    (0, common_1.Post)('sessions'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
-], UsersController.prototype, "login", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
@@ -89,8 +75,7 @@ __decorate([
 ], UsersController.prototype, "remove", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService,
-        authenticate_service_1.AuthenticateService])
+    __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map
