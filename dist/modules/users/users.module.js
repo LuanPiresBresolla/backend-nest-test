@@ -11,11 +11,17 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const users_controller_1 = require("./users.controller");
 const prisma_service_1 = require("../../prisma.service");
+const platform_express_1 = require("@nestjs/platform-express");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_service_1.PrismaService],
+        imports: [
+            prisma_service_1.PrismaService,
+            platform_express_1.MulterModule.register({
+                dest: './temp/upload',
+            }),
+        ],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService, prisma_service_1.PrismaService],
         exports: [users_service_1.UsersService],
