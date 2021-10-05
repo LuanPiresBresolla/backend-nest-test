@@ -8,16 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const auth_controller_1 = require("./modules/auth/auth.controller");
+const mongoose_1 = require("@nestjs/mongoose");
 const auth_module_1 = require("./modules/auth/auth.module");
 const users_module_1 = require("./modules/users/users.module");
 const chat_gateway_1 = require("./chat.gateway");
+const chats_module_1 = require("./modules/chats/chats.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule, auth_module_1.AuthModule],
-        controllers: [auth_controller_1.AuthController],
+        imports: [
+            users_module_1.UsersModule,
+            auth_module_1.AuthModule,
+            chats_module_1.ChatsModule,
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/nest'),
+        ],
+        controllers: [],
         providers: [chat_gateway_1.ChatGateway],
     })
 ], AppModule);
