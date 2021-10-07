@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
+import { Chat, ChatDocument } from './entities/chat.entity';
 
 @Injectable()
 export class ChatsService {
-  create(createChatDto: CreateChatDto) {
-    return 'This action adds a new chat';
+  constructor(@InjectModel(Chat.name) private chatModel: Model<ChatDocument>) {}
+
+  async createChat(createChatDto: CreateChatDto) {
+    const chat = new this.chatModel(createChatDto);
+    return chat.save();
   }
 
   findAll() {

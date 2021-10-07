@@ -2,14 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '.prisma/client';
 
 // Aqui ira ser feito o login do usuario
-
-type User = {
-  id: string;
-  login: string;
-};
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -37,11 +32,13 @@ export class AuthService {
   }
 
   // Aqui vai gerar o token do usuário
-  async login({ id, login }: User) {
+  async login(user: User) {
+    const { id, login } = user;
     const payload = { id, login };
 
     return {
-      access_token: this.jwtService.sign(payload),
+      user,
+      token: this.jwtService.sign(payload),
     };
   }
 }
